@@ -1,2 +1,2 @@
-# haskell-in-depth
+# Haskell in Depth
 Haskell in Depth book
