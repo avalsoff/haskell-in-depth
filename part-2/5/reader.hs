@@ -4,13 +4,13 @@ import Control.Monad.Reader
 
 data Config = Config {
     verbose :: Bool
-    {- other parameters -}
-  }
+  , slow :: Bool
+}
 
 type ConfigM = Reader Config
 
 getConfiguration :: IO Config
-getConfiguration = pure Config { verbose = True {- ... -} }
+getConfiguration = pure Config { verbose = True, slow = False }
 
 main :: IO ()
 main = do
@@ -33,9 +33,9 @@ doSomething = do
 doSomethingSpecial :: ConfigM ()
 doSomethingSpecial = do
   -- ...
-  -- Config {verbose} <- ask
-  vrb <- asks verbose
-  when vrb beVerbose
+  Config {verbose} <- ask
+  -- vrb <- asks verbose
+  when verbose beVerbose
   -- ...
 
 beVerbose :: ConfigM ()
